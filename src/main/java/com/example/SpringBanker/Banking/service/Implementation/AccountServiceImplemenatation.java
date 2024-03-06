@@ -48,6 +48,10 @@ public class AccountServiceImplemenatation implements AccountService {
     @Override
     public Accountdto withdraw(Long id, Double Amount) {
         Account account=accountRepository.findById(id).orElseThrow(()->new RuntimeException("Account does not exist"));
+
+        if (account.getBalance()<Amount){
+            throw new RuntimeException("Insufficient amount");
+        }
         double upDatedBalance= account.getBalance()-Amount;
         account.setBalance(upDatedBalance);
         Account savedAccount=accountRepository.save(account);
