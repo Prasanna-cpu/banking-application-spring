@@ -1,5 +1,6 @@
 package com.example.SpringBanker.Banking.service;
-
+import java.util.List;
+import com.example.SpringBanker.Banking.Controller.AccountController;
 import com.example.SpringBanker.Banking.dto.Accountdto;
 
 public interface AccountService {
@@ -10,5 +11,7 @@ public interface AccountService {
       Accountdto deposit(Long id,Double Amount);
 
       Accountdto withdraw(Long id,Double Amount);
+
+      List<Accountdto> getAllAccounts();
 
 }

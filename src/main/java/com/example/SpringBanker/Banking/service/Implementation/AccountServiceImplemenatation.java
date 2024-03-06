@@ -8,6 +8,8 @@ import com.example.SpringBanker.Banking.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 @Service
 public class AccountServiceImplemenatation implements AccountService {
@@ -57,6 +59,12 @@ public class AccountServiceImplemenatation implements AccountService {
         Account savedAccount=accountRepository.save(account);
         return  AccountMapper.mapToAccountDto(savedAccount);
 
+    }
+
+    @Override
+    public List<Accountdto> getAllAccounts() {
+        List<Account> AllAccounts = accountRepository.findAll();
+        return AllAccounts.stream().map(AccountMapper::mapToAccountDto).toList();
     }
 
     ;
