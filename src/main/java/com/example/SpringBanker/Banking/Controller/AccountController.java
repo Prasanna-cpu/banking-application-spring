@@ -2,20 +2,20 @@ package com.example.SpringBanker.Banking.Controller;
 
 
 import com.example.SpringBanker.Banking.dto.Accountdto;
-import com.example.SpringBanker.Banking.entity.Account;
+
 import com.example.SpringBanker.Banking.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
 @RequestMapping("/api/accounts")
 public class AccountController {
-    private AccountService accountService;
+    private final AccountService accountService;
 
 
     @Autowired
@@ -50,5 +50,24 @@ public class AccountController {
         return ResponseEntity.ok(accountDto);
     }
 
+    @GetMapping
+    public ResponseEntity<List<Accountdto>> getAllAccounts(){
+        List<Accountdto> accounts=accountService.getAllAccounts();
+        return ResponseEntity.ok(accounts);
+    }
 
+    @DeleteMapping
+    public ResponseEntity<String> deleteAccount(Long id){
+        try{
+            accountService.deleteAccount(id);
+        }
+
+        catch(Exception e){
+            //noinspection CallToPrintStackTrace
+            e.printStackTrace();
+        }
+
+        return ResponseEntity.ok("Record deleted");
+
+    }
 }
