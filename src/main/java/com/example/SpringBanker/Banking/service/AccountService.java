@@ -7,10 +7,8 @@ public interface AccountService {
 
       Accountdto getAccountById(Long id);
 
-      Accountdto getAccounts();
+      Accountdto deposit(Long id,Double Amount);
 
-      Accountdto updateAccountById(Long id);
-
-      Accountdto deleteAccountBtId(Long id);
+      Accountdto withdraw(Long id,Double Amount);
 
 }
